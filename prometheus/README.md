@@ -69,3 +69,46 @@ scrape_configs:
 ```
 sudo chown prometheus:prometheus /etc/prometheus/prometheus.yml
 ```
+# Running Prometheus
+- Start Prometheus directly from the command line with the following command, which executes the binary file as our `Prometheus` user:
+```
+sudo -u prometheus /usr/local/bin/prometheus --config.file /etc/prometheus/prometheus.yml --storage.tsdb.path /var/lib/prometheus/ --web.console.templates=/etc/prometheus/consoles --web.console.libraries=/etc/prometheus/console_libraries
+```
+- Open your browser and type `http://IP.OF.YOUR.SERVER:9090` to access the Prometheus interface. If everything is working, we end the task by pressing on `CTRL + C` on our keyboard.
+- The server is working now, but it cannot yet be launched automatically at boot. To achieve this, we have to create a new `systemd` configuration file that will tell your OS which services should it launch automatically during the boot process.
+```sudo nano /etc/systemd/system/prometheus.service```
+- The service file tells `systemd` to run Prometheus as `prometheus` and specifies the path of the configuration files.
+- Copy the following information in the file and save it, then exit the editor:
+```
+[Unit]
+  Description=Prometheus Monitoring
+  Wants=network-online.target
+  After=network-online.target
+
+[Service]
+  User=prometheus
+  Group=prometheus
+  Type=simple
+  ExecStart=/usr/local/bin/prometheus \
+  --config.file /etc/prometheus/prometheus.yml \
+  --storage.tsdb.path /var/lib/prometheus/ \
+  --web.console.templates=/etc/prometheus/consoles \
+  --web.console.libraries=/etc/prometheus/console_libraries
+  ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+  WantedBy=multi-user.target
+```
+- To use the new service, reload `systemd`:
+```
+sudo systemctl daemon-reload
+```
+- We enable the service so that it will be loaded automatically during boot:
+```
+sudo systemctl enable prometheus
+```
+- Start Prometheus:
+```
+sudo systemctl start prometheus
+```
+## Prometheus provides a basic web server running on `http://your.server.ip:9000` that provide access to the data collected by the software.
