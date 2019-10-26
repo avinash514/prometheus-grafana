@@ -16,16 +16,16 @@ wget https://github.com/prometheus/node_exporter/releases/download/v0.18.1/node_
 ```
 - Unpack the downloaded archive. This will create a directory `node_exporter-0.18.1.linux-amd64`, containing the executable, a readme and license file:
 ```
-tar xvf node_exporter-0.16.0.linux-amd64.tar.gz
+tar xvf node_exporter-0.18.1.linux-amd64.tar.gz
 ```
 - Copy the binary file into the directory `/usr/local/bin` and set the ownership to the user you have created in step previously:
 ```
-sudo cp node_exporter-0.16.0.linux-amd64/node_exporter /usr/local/bin
+sudo cp node_exporter-0.18.1.linux-amd64/node_exporter /usr/local/bin
 sudo chown node_exporter:node_exporter /usr/local/bin/node_exporter
 ```
 - Remove the leftover files of Node Exporter, as they are not needed any longer:
 ```
-rm -rf node_exporter-0.16.0.linux-amd64.tar.gz node_exporter-0.16.0.linux-amd64
+rm -rf node_exporter-0.18.1.linux-amd64.tar.gz node_exporter-0.18.1.linux-amd64
 ```
 - To run Node Exporter automatically on each boot, a Systemd service file is required. Create the following file by opening it in Nano:
 ```
