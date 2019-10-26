@@ -22,7 +22,7 @@ sudo chown prometheus:prometheus /var/lib/prometheus
 ### Installation
 - Downloading and Extracting
 ```
-wget https://github.com/prometheus/prometheus/releases/download/v2.2.1/prometheus-2.2.1.linux-amd64.tar.gz
+wget  https://github.com/prometheus/prometheus/releases/download/v2.13.1/prometheus-2.13.1.linux-amd64.tar.gz
 tar xfz prometheus-*.tar.gz
 cd prometheus-*
 ```
