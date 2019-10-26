@@ -114,4 +114,4 @@ sudo systemctl start prometheus
 ## Prometheus provides a basic web server running on `http://your.server.ip:9000` that provide access to the data collected by the software.
 
 # node-exporter installation
-[node-exporter installation](../prometheus/README.md)
+[node-exporter installation](../node-exporter/README.md)
