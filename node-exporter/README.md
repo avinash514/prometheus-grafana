@@ -72,3 +72,10 @@ sudo systemctl status node_exporter
 ```
 sudo systemctl enable node_exporter
 ```
+- Add below config to prometheus.yml file
+```
+- job_name: 'node_exporter'
+  scrape_interval: 5s
+  static_configs:
+    - targets: ['localhost:9100']
+```
